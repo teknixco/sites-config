@@ -264,12 +264,12 @@ services:
     image: httpd:latest
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.pmbcnginx.rule=Host(`printmybusinesscard.com`)"
-      - "traefik.http.routers.pmbcnginx.entrypoints=websecure"
-      - "traefik.http.routers.pmbcnginx.tls.certresolver=let"
+      - "traefik.http.routers.pmbc.rule=Host(`printmybusinesscard.com`)"
+      - "traefik.http.routers.pmbc.entrypoints=websecure"
+      - "traefik.http.routers.pmbc.tls.certresolver=let"
     volumes: 
-      - /home/ubuntu/sites/pmbizcard/html:/usr/local/apache2/htdocs:delegated
-      - /home/ubuntu/sites/pmbizcard/apache2:/usr/local/apache2/conf:delegated
+      - /home/ubuntu/sites/pmbc/html:/usr/local/apache2/htdocs:delegated
+      - /home/ubuntu/sites/pmbc/apache2:/usr/local/apache2/conf:delegated
     networks:
       - teknixcovpc
 
