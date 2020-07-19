@@ -1,0 +1,4 @@
+/home/ubuntu/sites//html/wp-content/themes:/var/www/html/wp-content/themes
+/home/ubuntu/sites//html/wp-content/plugins:/var/www/html/wp-content/plugins
+/home/ubuntu/sites//html/wp-content/mu-plugins:/var/www/html/wp-content/mu-plugins
+/home/ubuntu/sites-efs//wp-content/uploads:/var/www/html/wp-content/uploads
