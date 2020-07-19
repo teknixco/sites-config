@@ -1,0 +1,266 @@
+version: '3.1'
+
+services:
+  traefik:
+    image: "traefik:latest"
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8087:8080"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "./letsencrypt:/letsencrypt"
+      - "./certs/:/certs/:ro"
+      - "./traefik.yml:/etc/traefik/dynamic_conf/conf.yml"
+    networks:
+      - teknixcovpc
+    command:
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--api.insecure"
+      - "--api.dashboard=true"
+      - "--certificatesresolvers.let.acme.httpchallenge.entrypoint=websecure"
+      - "--certificatesresolvers.let.acme.email=vic@teknixco.net"
+      - "--certificatesresolvers.let.acme.httpchallenge=true"
+      - "--certificatesresolvers.let.acme.storage=/letsencrypt/acme.json"
+    labels:
+      traefik.enable: true
+      # Global redirection: http to https
+      traefik.http.routers.http-catchall.rule: HostRegexp(`{host:(www\.)?.+}`)
+      traefik.http.routers.http-catchall.entrypoints: web
+      traefik.http.routers.http-catchall.middlewares: wwwtohttps
+      # Global redirection: https (www.) to https
+      traefik.http.routers.wwwsecure-catchall.rule: HostRegexp(`{host:(www\.).+}`)
+      traefik.http.routers.wwwsecure-catchall.entrypoints: websecure
+      traefik.http.routers.wwwsecure-catchall.tls: true
+      traefik.http.routers.wwwsecure-catchall.middlewares: wwwtohttps
+      # middleware: http(s)://(www.) to  https://
+      traefik.http.middlewares.wwwtohttps.redirectregex.regex: ^https?://(?:www\.)?(.+)
+      traefik.http.middlewares.wwwtohttps.redirectregex.replacement: https://$${1}
+      traefik.http.middlewares.wwwtohttps.redirectregex.permanent: true
+
+  teknixco:
+    image: wordpress:latest
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.teknixco.rule=Host(`teknixco.net`)"
+      - "traefik.http.routers.teknixco.entrypoints=websecure"
+      - "traefik.http.routers.teknixco.tls.certresolver=let"
+#      - "traefik.http.routers.teknixco.tls.domains[0].main=teknixco.net"
+#      - "traefik.http.routers.teknixco.tls.domains[0].sans=www.teknixco.net"
+    volumes:
+      - /home/ubuntu/sites/teknixco/html/:/var/www/html:delegated
+      - /home/ubuntu/sites/teknixco/apache2/:/etc/apache2:delegated
+    environment:
+      - WORDPRESS_DB_HOST=teknixcodb.ctptcob6ajbf.us-east-1.rds.amazonaws.com
+      - WORDPRESS_DB_USER=teknixcodbadmin
+      - WORDPRESS_DB_PASSWORD=Godisgood7!2020*
+      - WORDPRESS_DB_NAME=teknixcodbdatabase
+    networks:
+      - teknixcovpc
+
+  techguide:
+    image: wordpress:latest
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.techguide.rule=Host(`techliveguide.com`)"
+      - "traefik.http.routers.techguide.entrypoints=websecure"
+      - "traefik.http.routers.techguide.tls.certresolver=let"
+#      - "traefik.http.routers.techguide.tls.domains[0].main=techliveguide.com"
+#      - "traefik.http.routers.techguide.tls.domains[0].sans=www.techliveguide.com"
+    volumes:
+      - /home/ubuntu/sites/techguide/html/:/var/www/html/:delegated
+      - /home/ubuntu/sites/techguide/apache2/:/etc/apache2:delegated
+    environment:
+      - WORDPRESS_DB_HOST=teknixcodb.ctptcob6ajbf.us-east-1.rds.amazonaws.com
+      - WORDPRESS_DB_USER=teknixcodbadmin
+      - WORDPRESS_DB_PASSWORD=Godisgood7!2020*
+      - WORDPRESS_DB_NAME=techguidedatabase
+    networks:
+      - teknixcovpc
+
+  newera:
+    image: wordpress:latest
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.newera.rule=Host(`neweradesign.net`)"
+      - "traefik.http.routers.newera.entrypoints=websecure"
+      - "traefik.http.routers.newera.tls.certresolver=let"
+#      - "traefik.http.routers.newera.tls.domains[0].main=neweradesign.net"
+#      - "traefik.http.routers.newera.tls.domains[0].sans=www.neweradesign.net"
+    volumes:
+      - /home/ubuntu/sites/newera/html/:/var/www/html/:delegated
+      - /home/ubuntu/sites/newera/apache2/:/etc/apache2:delegated
+    environment:
+      - WORDPRESS_DB_HOST=teknixcodb.ctptcob6ajbf.us-east-1.rds.amazonaws.com
+      - WORDPRESS_DB_USER=teknixcodbadmin
+      - WORDPRESS_DB_PASSWORD=Godisgood7!2020*
+      - WORDPRESS_DB_NAME=neweradatabase
+    networks:
+      - teknixcovpc
+  
+  zippystores:
+    image: wordpress:latest
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.zippystores.rule=Host(`dezippystores.com`)"
+      - "traefik.http.routers.zippystores.entrypoints=websecure"
+      - "traefik.http.routers.zippystores.tls.certresolver=let"
+#      - "traefik.http.routers.zippystores.tls.domains[0].main=dezippystores.com"
+#      - "traefik.http.routers.zippystores.tls.domains[0].sans=www.dezippystores.com"
+    volumes:
+      - /home/ubuntu/sites/zipps/html/:/var/www/html/:delegated
+      - /home/ubuntu/sites/zipps/apache2/:/etc/apache2:delegated
+    environment:
+      - WORDPRESS_DB_HOST=teknixcodb.ctptcob6ajbf.us-east-1.rds.amazonaws.com
+      - WORDPRESS_DB_USER=teknixcodbadmin
+      - WORDPRESS_DB_PASSWORD=Godisgood7!2020*
+      - WORDPRESS_DB_NAME=zippystoresdatabase
+    networks:
+      - teknixcovpc
+
+  akwa:
+    image: wordpress:latest
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.akwa.rule=Host(`akwaibomculture.com`)"
+      - "traefik.http.routers.akwa.entrypoints=websecure"
+      - "traefik.http.routers.akwa.tls.certresolver=let"
+#      - "traefik.http.routers.akwa.tls.domains[0].main=akwaibomculture.com"
+#      - "traefik.http.routers.akwa.tls.domains[0].sans=www.akwaibomculture.com"
+    volumes:
+      - /home/ubuntu/sites/akwa/html/:/var/www/html/:delegated
+      - /home/ubuntu/sites/akwa/apache2/:/etc/apache2:delegated
+    environment:
+      - WORDPRESS_DB_HOST=teknixcodb.ctptcob6ajbf.us-east-1.rds.amazonaws.com
+      - WORDPRESS_DB_USER=teknixcodbadmin
+      - WORDPRESS_DB_PASSWORD=Godisgood7!2020*
+      - WORDPRESS_DB_NAME=akwawpdatabase
+    networks:
+      - teknixcovpc
+
+  shopcanvas:
+    image: wordpress:latest
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.shopcanvas.rule=Host(`shopcanvasprints.com`)"
+      - "traefik.http.routers.shopcanvas.entrypoints=websecure"
+      - "traefik.http.routers.shopcanvas.tls.certresolver=let"
+#      - "traefik.http.routers.shopcanvas.tls.domains[0].main=shopcanvasprints.com"
+#      - "traefik.http.routers.shopcanvas.tls.domains[0].sans=www.shopcanvasprints.com"
+    volumes:
+      - /home/ubuntu/sites/shopcanvas/html/:/var/www/html/:delegated
+      - /home/ubuntu/sites/shopcanvas/apache2/:/etc/apache2:delegated
+    environment:
+      - WORDPRESS_DB_HOST=teknixcodb.ctptcob6ajbf.us-east-1.rds.amazonaws.com
+      - WORDPRESS_DB_USER=teknixcodbadmin
+      - WORDPRESS_DB_PASSWORD=Godisgood7!2020*
+      - WORDPRESS_DB_NAME=shopcanvasdatabase
+    networks:
+      - teknixcovpc
+
+  hphotos:
+    image: wordpress:latest
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.hphotos.rule=Host(`houstonphotoprints.com`)"
+      - "traefik.http.routers.hphotos.entrypoints=websecure"
+      - "traefik.http.routers.hphotos.tls.certresolver=let"
+#      - "traefik.http.routers.hphotos.tls.domains[0].main=houstonphotoprints.com"
+#      - "traefik.http.routers.hphotos.tls.domains[0].sans=www.houstonphotoprints.com"
+    volumes:
+      - /home/ubuntu/sites/hphotos/html/:/var/www/html/:delegated
+      - /home/ubuntu/sites/hphotos/apache2/:/etc/apache2:delegated
+    environment:
+      - WORDPRESS_DB_HOST=teknixcodb.ctptcob6ajbf.us-east-1.rds.amazonaws.com
+      - WORDPRESS_DB_USER=teknixcodbadmin
+      - WORDPRESS_DB_PASSWORD=Godisgood7!2020*
+      - WORDPRESS_DB_NAME=hphotoprintsdatabase
+    networks:
+      - teknixcovpc
+
+  houstonetwork:
+    image: wordpress:latest
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.houstonetwork.rule=Host(`houstonetwork.com`)"
+      - "traefik.http.routers.houstonetwork.entrypoints=websecure"
+      - "traefik.http.routers.houstonetwork.tls.certresolver=let"
+#      - "traefik.http.routers.houstonetwork.tls.domains[0].main=houstonetwork.com"
+#      - "traefik.http.routers.houstonetwork.tls.domains[0].sans=www.houstonetwork.com"
+    volumes:
+      - /home/ubuntu/sites/houstonetwork/html/:/var/www/html/:delegated
+      - /home/ubuntu/sites/houstonetwork/apache2/:/etc/apache2:delegated
+    environment:
+      - WORDPRESS_DB_HOST=teknixcodb.ctptcob6ajbf.us-east-1.rds.amazonaws.com
+      - WORDPRESS_DB_USER=teknixcodbadmin
+      - WORDPRESS_DB_PASSWORD=Godisgood7!2020*
+      - WORDPRESS_DB_NAME=houstonetworkdatabase
+    networks:
+      - teknixcovpc
+
+  vinshots:
+    image: wordpress:latest
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.vinshots.rule=Host(`vintage-shots.com`)"
+      - "traefik.http.routers.vinshots.entrypoints=websecure"
+      - "traefik.http.routers.vinshots.tls.certresolver=let"
+#      - "traefik.http.routers.vinshots.tls.domains[0].main=vintage-shots.com"
+#      - "traefik.http.routers.vinshots.tls.domains[0].sans=www.vintage-shots.com"
+    volumes:
+      - /home/ubuntu/sites/vinshots/html/:/var/www/html/:delegated
+      - /home/ubuntu/sites/vinshots/apache2/:/etc/apache2:delegated
+    environment:
+      - WORDPRESS_DB_HOST=teknixcodb.ctptcob6ajbf.us-east-1.rds.amazonaws.com
+      - WORDPRESS_DB_USER=teknixcodbadmin
+      - WORDPRESS_DB_PASSWORD=Godisgood7!2020*
+      - WORDPRESS_DB_NAME=vinshotsdatabase
+    networks:
+      - teknixcovpc
+
+  vintej:
+    image: wordpress:latest
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.vintej.rule=Host(`vintejvic.com`)"
+      - "traefik.http.routers.vintej.entrypoints=websecure"
+      - "traefik.http.routers.vintej.tls.certresolver=let"
+#      - "traefik.http.routers.vintej.tls.domains[0].main=vintej.com"
+#      - "traefik.http.routers.vintej.tls.domains[0].sans=www.vintej.com"
+    volumes:
+      - /home/ubuntu/sites/vintej/html/:/var/www/html/:delegated
+      - /home/ubuntu/sites/vintej/apache2/:/etc/apache2:delegated
+    environment:
+      - WORDPRESS_DB_HOST=teknixcodb.ctptcob6ajbf.us-east-1.rds.amazonaws.com
+      - WORDPRESS_DB_USER=teknixcodbadmin
+      - WORDPRESS_DB_PASSWORD=Godisgood7!2020*
+      - WORDPRESS_DB_NAME=vintejdatabase
+    networks:
+      - teknixcovpc
+
+#STATIC WEBSITES BEGIN HERE
+#
+  pmbc:
+    image: httpd:latest
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.pmbcnginx.rule=Host(`printmybusinesscard.com`)"
+      - "traefik.http.routers.pmbcnginx.entrypoints=websecure"
+      - "traefik.http.routers.pmbcnginx.tls.certresolver=let"
+    volumes: 
+      - /home/ubuntu/sites/pmbizcard/html/:/usr/local/apache2/htdocs:delegated
+      - /home/ubuntu/sites/pmbizcard/apache2/:/usr/local/apache2/conf:delegated
+    networks:
+      - teknixcovpc
+
+networks:
+  teknixcovpc:
+    driver: bridge
+
+
