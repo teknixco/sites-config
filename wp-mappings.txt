@@ -1,4 +1,5 @@
-/home/ubuntu/sites//html/wp-content/themes:/var/www/html/wp-content/themes
-/home/ubuntu/sites//html/wp-content/plugins:/var/www/html/wp-content/plugins
-/home/ubuntu/sites//html/wp-content/mu-plugins:/var/www/html/wp-content/mu-plugins
-/home/ubuntu/sites-efs//wp-content/uploads:/var/www/html/wp-content/uploads
+- /home/ubuntu/sites//html/wp-content/fonts:/var/www/html/wp-content/fonts:delegated
+- /home/ubuntu/sites//html/wp-content/themes:/var/www/html/wp-content/themes:delegated
+- /home/ubuntu/sites//html/wp-content/plugins:/var/www/html/wp-content/plugins:delegated
+- /home/ubuntu/sites//html/wp-content/mu-plugins:/var/www/html/wp-content/mu-plugins:delegated
+- /home/ubuntu/sites-efs//wp-content/uploads:/var/www/html/wp-content/uploads:delegated

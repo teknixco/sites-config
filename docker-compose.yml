@@ -51,6 +51,7 @@ services:
 #      - "traefik.http.routers.teknixco.tls.domains[0].main=teknixco.net"
 #      - "traefik.http.routers.teknixco.tls.domains[0].sans=www.teknixco.net"
     volumes:
+      - /home/ubuntu/sites/teknixco/html/wp-content/fonts:/var/www/html/wp-content/fonts:delegated
       - /home/ubuntu/sites/teknixco/html/wp-content/themes:/var/www/html/wp-content/themes:delegated
       - /home/ubuntu/sites/teknixco/html/wp-content/plugins:/var/www/html/wp-content/plugins:delegated
       - /home/ubuntu/sites/teknixco/html/wp-content/mu-plugins:/var/www/html/wp-content/mu-plugins:delegated
@@ -75,6 +76,7 @@ services:
 #      - "traefik.http.routers.techguide.tls.domains[0].main=techliveguide.com"
 #      - "traefik.http.routers.techguide.tls.domains[0].sans=www.techliveguide.com"
     volumes:
+      - /home/ubuntu/sites/techguide/html/wp-content/fonts:/var/www/html/wp-content/fonts:delegated
       - /home/ubuntu/sites/techguide/html/wp-content/themes:/var/www/html/wp-content/themes:delegated
       - /home/ubuntu/sites/techguide/html/wp-content/plugins:/var/www/html/wp-content/plugins:delegated
       - /home/ubuntu/sites/techguide/html/wp-content/mu-plugins:/var/www/html/wp-content/mu-plugins:delegated
@@ -98,6 +100,7 @@ services:
 #      - "traefik.http.routers.newera.tls.domains[0].main=neweradesign.net"
 #      - "traefik.http.routers.newera.tls.domains[0].sans=www.neweradesign.net"
     volumes:
+      - /home/ubuntu/sites/newera/html/wp-content/fonts:/var/www/html/wp-content/fonts:delegated
       - /home/ubuntu/sites/newera/html/wp-content/themes:/var/www/html/wp-content/themes:delegated
       - /home/ubuntu/sites/newera/html/wp-content/plugins:/var/www/html/wp-content/plugins:delegated
       - /home/ubuntu/sites/newera/html/wp-content/mu-plugins:/var/www/html/wp-content/mu-plugins:delegated
@@ -121,6 +124,7 @@ services:
 #      - "traefik.http.routers.akwa.tls.domains[0].main=akwaibomculture.com"
 #      - "traefik.http.routers.akwa.tls.domains[0].sans=www.akwaibomculture.com"
     volumes:
+      - /home/ubuntu/sites/akwa/html/wp-content/fonts:/var/www/html/wp-content/fonts:delegated
       - /home/ubuntu/sites/akwa/html/wp-content/themes:/var/www/html/wp-content/themes:delegated
       - /home/ubuntu/sites/akwa/html/wp-content/plugins:/var/www/html/wp-content/plugins:delegated
       - /home/ubuntu/sites/akwa/html/wp-content/mu-plugins:/var/www/html/wp-content/mu-plugins:delegated
@@ -144,6 +148,7 @@ services:
 #      - "traefik.http.routers.shopcanvas.tls.domains[0].main=shopcanvasprints.com"
 #      - "traefik.http.routers.shopcanvas.tls.domains[0].sans=www.shopcanvasprints.com"
     volumes:
+      - /home/ubuntu/sites/shopcanvas/html/wp-content/fonts:/var/www/html/wp-content/fonts:delegated
       - /home/ubuntu/sites/shopcanvas/html/wp-content/themes:/var/www/html/wp-content/themes:delegated
       - /home/ubuntu/sites/shopcanvas/html/wp-content/plugins:/var/www/html/wp-content/plugins:delegated
       - /home/ubuntu/sites/shopcanvas/html/wp-content/mu-plugins:/var/www/html/wp-content/mu-plugins:delegated
@@ -167,6 +172,7 @@ services:
 #      - "traefik.http.routers.hphotos.tls.domains[0].main=houstonphotoprints.com"
 #      - "traefik.http.routers.hphotos.tls.domains[0].sans=www.houstonphotoprints.com"
     volumes:
+      - /home/ubuntu/sites/hphotos/html/wp-content/fonts:/var/www/html/wp-content/fonts:delegated
       - /home/ubuntu/sites/hphotos/html/wp-content/themes:/var/www/html/wp-content/themes:delegated
       - /home/ubuntu/sites/hphotos/html/wp-content/plugins:/var/www/html/wp-content/plugins:delegated
       - /home/ubuntu/sites/hphotos/html/wp-content/mu-plugins:/var/www/html/wp-content/mu-plugins:delegated
@@ -190,6 +196,7 @@ services:
 #      - "traefik.http.routers.houstonetwork.tls.domains[0].main=houstonetwork.com"
 #      - "traefik.http.routers.houstonetwork.tls.domains[0].sans=www.houstonetwork.com"
     volumes:
+      - /home/ubuntu/sites/houstonetwork/html/wp-content/fonts:/var/www/html/wp-content/fonts:delegated
       - /home/ubuntu/sites/houstonetwork/html/wp-content/themes:/var/www/html/wp-content/themes:delegated
       - /home/ubuntu/sites/houstonetwork/html/wp-content/plugins:/var/www/html/wp-content/plugins:delegated
       - /home/ubuntu/sites/houstonetwork/html/wp-content/mu-plugins:/var/www/html/wp-content/mu-plugins:delegated
@@ -213,6 +220,7 @@ services:
 #      - "traefik.http.routers.vinshots.tls.domains[0].main=vintage-shots.com"
 #      - "traefik.http.routers.vinshots.tls.domains[0].sans=www.vintage-shots.com"
     volumes:
+      - /home/ubuntu/sites/vinshots/html/wp-content/fonts:/var/www/html/wp-content/fonts:delegated
       - /home/ubuntu/sites/vinshots/html/wp-content/themes:/var/www/html/wp-content/themes:delegated
       - /home/ubuntu/sites/vinshots/html/wp-content/plugins:/var/www/html/wp-content/plugins:delegated
       - /home/ubuntu/sites/vinshots/html/wp-content/mu-plugins:/var/www/html/wp-content/mu-plugins:delegated
@@ -236,6 +244,7 @@ services:
 #      - "traefik.http.routers.vintej.tls.domains[0].main=vintej.com"
 #      - "traefik.http.routers.vintej.tls.domains[0].sans=www.vintej.com"
     volumes:
+      - /home/ubuntu/sites/vintej/html/wp-content/fonts:/var/www/html/wp-content/fonts:delegated
       - /home/ubuntu/sites/vintej/html/wp-content/themes:/var/www/html/wp-content/themes:delegated
       - /home/ubuntu/sites/vintej/html/wp-content/plugins:/var/www/html/wp-content/plugins:delegated
       - /home/ubuntu/sites/vintej/html/wp-content/mu-plugins:/var/www/html/wp-content/mu-plugins:delegated
@@ -259,7 +268,7 @@ services:
       - "traefik.http.routers.pmbcnginx.entrypoints=websecure"
       - "traefik.http.routers.pmbcnginx.tls.certresolver=let"
     volumes: 
-      - /home/ubuntu/sites/pmbizcard/html/:/usr/local/apache2/htdocs:delegated
+      - /home/ubuntu/sites/pmbizcard/html:/usr/local/apache2/htdocs:delegated
       - /home/ubuntu/sites/pmbizcard/apache2:/usr/local/apache2/conf:delegated
     networks:
       - teknixcovpc
