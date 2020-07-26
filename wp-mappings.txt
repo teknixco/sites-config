@@ -3,3 +3,4 @@
 - /home/ubuntu/sites//html/wp-content/plugins:/var/www/html/wp-content/plugins:delegated
 - /home/ubuntu/sites//html/wp-content/mu-plugins:/var/www/html/wp-content/mu-plugins:delegated
 - /home/ubuntu/sites-efs//wp-content/uploads:/var/www/html/wp-content/uploads:delegated
+- /homme/ubuntu/sites//html/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
