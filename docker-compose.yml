@@ -132,6 +132,7 @@ services:
       - /home/ubuntu/sites/akwa/html/wp-content/mu-plugins:/var/www/html/wp-content/mu-plugins:delegated
       - /home/ubuntu/sites-efs/akwa/wp-content/uploads:/var/www/html/wp-content/uploads:delegated
       - /home/ubuntu/sites/akwa/apache2:/etc/apache2:delegated
+      - /home/ubuntu/sites/akwa/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
     environment:
       - WORDPRESS_DB_HOST=teknixcodb.ctptcob6ajbf.us-east-1.rds.amazonaws.com
       - WORDPRESS_DB_USER=teknixcodbadmin
