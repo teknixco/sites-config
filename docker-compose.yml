@@ -57,6 +57,7 @@ services:
       - /home/ubuntu/sites/teknixco/html/wp-content/mu-plugins:/var/www/html/wp-content/mu-plugins:delegated
       - /home/ubuntu/sites-efs/teknixco/wp-content/uploads:/var/www/html/wp-content/uploads:delegated
       - /home/ubuntu/sites/teknixco/apache2:/etc/apache2:delegated
+      - /home/ubuntu/sites/teknixco/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
     environment:
       - WORDPRESS_DB_HOST=teknixcodb.ctptcob6ajbf.us-east-1.rds.amazonaws.com
       - WORDPRESS_DB_USER=teknixcodbadmin
@@ -84,6 +85,7 @@ services:
       - /home/ubuntu/sites/techguide/html/wp-content/mu-plugins:/var/www/html/wp-content/mu-plugins:delegated
       - /home/ubuntu/sites-efs/techguide/wp-content/uploads:/var/www/html/wp-content/uploads:delegated
       - /home/ubuntu/sites/techguide/apache2:/etc/apache2:delegated
+      - /home/ubuntu/sites/techguide/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
     environment:
       - WORDPRESS_DB_HOST=teknixcodb.ctptcob6ajbf.us-east-1.rds.amazonaws.com
       - WORDPRESS_DB_USER=teknixcodbadmin
@@ -108,6 +110,7 @@ services:
       - /home/ubuntu/sites/newera/html/wp-content/mu-plugins:/var/www/html/wp-content/mu-plugins:delegated
       - /home/ubuntu/sites-efs/newera/wp-content/uploads:/var/www/html/wp-content/uploads:delegated
       - /home/ubuntu/sites/newera/apache2:/etc/apache2:delegated
+      - /home/ubuntu/sites/newera/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
     environment:
       - WORDPRESS_DB_HOST=teknixcodb.ctptcob6ajbf.us-east-1.rds.amazonaws.com
       - WORDPRESS_DB_USER=teknixcodbadmin
@@ -157,6 +160,7 @@ services:
       - /home/ubuntu/sites/shopcanvas/html/wp-content/mu-plugins:/var/www/html/wp-content/mu-plugins:delegated
       - /home/ubuntu/sites-efs/shopcanvas/wp-content/uploads:/var/www/html/wp-content/uploads:delegated
       - /home/ubuntu/sites/shopcanvas/apache2:/etc/apache2:delegated
+      - /home/ubuntu/sites/shopcanvas/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
     environment:
       - WORDPRESS_DB_HOST=teknixcodb.ctptcob6ajbf.us-east-1.rds.amazonaws.com
       - WORDPRESS_DB_USER=teknixcodbadmin
@@ -181,6 +185,7 @@ services:
       - /home/ubuntu/sites/hphotos/html/wp-content/mu-plugins:/var/www/html/wp-content/mu-plugins:delegated
       - /home/ubuntu/sites-efs/hphotos/wp-content/uploads:/var/www/html/wp-content/uploads:delegated
       - /home/ubuntu/sites/hphotos/apache2:/etc/apache2:delegated
+      - /home/ubuntu/sites/hphotos/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
     environment:
       - WORDPRESS_DB_HOST=teknixcodb.ctptcob6ajbf.us-east-1.rds.amazonaws.com
       - WORDPRESS_DB_USER=teknixcodbadmin
@@ -205,6 +210,7 @@ services:
       - /home/ubuntu/sites/houstonetwork/html/wp-content/mu-plugins:/var/www/html/wp-content/mu-plugins:delegated
       - /home/ubuntu/sites-efs/houstonetwork/wp-content/uploads:/var/www/html/wp-content/uploads:delegated
       - /home/ubuntu/sites/houstonetwork/apache2:/etc/apache2:delegated
+      - /home/ubuntu/sites/houstonetwork/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
     environment:
       - WORDPRESS_DB_HOST=teknixcodb.ctptcob6ajbf.us-east-1.rds.amazonaws.com
       - WORDPRESS_DB_USER=teknixcodbadmin
@@ -229,6 +235,7 @@ services:
       - /home/ubuntu/sites/vinshots/html/wp-content/mu-plugins:/var/www/html/wp-content/mu-plugins:delegated
       - /home/ubuntu/sites-efs/vinshots/wp-content/uploads:/var/www/html/wp-content/uploads:delegated
       - /home/ubuntu/sites/vinshots/apache2:/etc/apache2:delegated
+      - /home/ubuntu/sites/vinshots/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
     environment:
       - WORDPRESS_DB_HOST=teknixcodb.ctptcob6ajbf.us-east-1.rds.amazonaws.com
       - WORDPRESS_DB_USER=teknixcodbadmin
@@ -253,6 +260,7 @@ services:
       - /home/ubuntu/sites/vintej/html/wp-content/mu-plugins:/var/www/html/wp-content/mu-plugins:delegated
       - /home/ubuntu/sites-efs/vintej/wp-content/uploads:/var/www/html/wp-content/uploads:delegated
       - /home/ubuntu/sites/vintej/apache2:/etc/apache2:delegated
+      - /home/ubuntu/sites/vintej/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
     environment:
       - WORDPRESS_DB_HOST=teknixcodb.ctptcob6ajbf.us-east-1.rds.amazonaws.com
       - WORDPRESS_DB_USER=teknixcodbadmin
